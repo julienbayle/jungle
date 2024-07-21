@@ -158,6 +158,7 @@ class Game:
         pygame.init()
         self.screen = pygame.display.set_mode((7 * SQUARE_SIZE, 9 * SQUARE_SIZE))
         pygame.display.set_caption('Jungle')
+        self.clock = pygame.time.Clock()
         self.reset()
 
     def reset(self):
@@ -170,12 +171,13 @@ class Game:
         self.draw()
         running = True
         while running:
-            await asyncio.sleep(0.01)
+            await asyncio.sleep(0)
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     self.clic(event)
                 if event.type == pygame.QUIT:
                     running = False
+            self.clock.tick(60)
         pygame.quit()
 
     def clic(self, event):
@@ -199,10 +201,6 @@ class Game:
 
                     # Game won
                     if square.x == 3 and square.y in [0, 8]:
-                        for i in range(0, 10):
-                            square.animal.update(i % 2 == 0)
-                            self.draw()
-                            asyncio.time.sleep(0.2)
                         self.reset()
 
         self.draw()
@@ -222,7 +220,8 @@ class Game:
     def draw(self):
         for _, square in self.squares.items():
             square.draw(self.screen)
-        pygame.display.flip()
+        pygame.display.update()
 
 
-asyncio.run(Game().run())
+if __name__ == "__main__":
+    asyncio.run(Game().run())
