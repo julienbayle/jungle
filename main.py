@@ -1,7 +1,7 @@
 import pygame
-import time
 from pygame import Color
 from typing import Optional, Tuple, Dict
+import asyncio
 
 SQUARE_SIZE = 80
 
@@ -166,11 +166,11 @@ class Game:
             for y in range(0, 9):
                 self.squares[(x, y)] = Square(x, y)
 
-    def run(self):
+    async def run(self):
         self.draw()
         running = True
         while running:
-            time.sleep(0.01)
+            await asyncio.sleep(0.01)
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     self.clic(event)
@@ -202,7 +202,7 @@ class Game:
                         for i in range(0, 10):
                             square.animal.update(i % 2 == 0)
                             self.draw()
-                            time.sleep(0.2)
+                            asyncio.time.sleep(0.2)
                         self.reset()
 
         self.draw()
@@ -225,4 +225,4 @@ class Game:
         pygame.display.flip()
 
 
-Game().run()
+asyncio.run(Game().run())

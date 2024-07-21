@@ -9,5 +9,6 @@ He enjoys this game !
 
 --
 
-Added a web export using https://pygame-web.github.io/
-The game is available here : https://julienbayle.github.io/jungle/ (could be slow use a python emulator in JS)
+Added a web version using https://pypi.org/project/pygbag/
+Added a github page hosted version of the game using https://pygame-web.github.io/
+The game is available here: https://julienbayle.github.io/jungle/
